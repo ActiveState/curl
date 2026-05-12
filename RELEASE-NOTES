@@ -1,3 +1,35 @@
+curl and libcurl 8.17.0.1 (ActiveState security backport)
+
+This is a downstream security backport of curl 8.17.0 maintained by
+ActiveState for environments that require OpenSSL 1.1.1 compatibility.
+Upstream curl 8.18.0 raised the minimum OpenSSL version to 3.0.0, which
+makes simply tracking upstream impossible for OpenSSL-1.1.1-based stacks.
+
+This release backports security fixes only. No new features, API changes,
+or behavioral changes are included.
+
+Security fixes backported from upstream 8.18.0 / 8.19.0:
+
+ o CVE-2025-13034: ngtcp2/gnutls QUIC certificate pinning bypass
+ o CVE-2025-14017: LDAPS option-setting in multi-threaded transfers
+ o CVE-2025-14524: OAuth2 bearer leak via cross-protocol redirect (IMAP/LDAP/POP3/SMTP)
+ o CVE-2025-14819: OpenSSL CA-cache reuse ignoring CURLSSLOPT_NO_PARTIALCHAIN
+ o CVE-2025-15079: libssh accepted mismatched/empty knownhosts file
+ o CVE-2025-15224: libssh fell back to SSH-agent when only pubkey auth was requested
+ o CVE-2026-1965: HTTP Negotiate connection reused with different credentials
+ o CVE-2026-3783: HTTP bearer token sent to redirect destination when not auth-allowed
+ o CVE-2026-3784: HTTP proxy connection reused with different proxy credentials
+ o CVE-2026-3805: SMB use-after-free on connection teardown (req->path)
+
+For full advisory details see https://curl.se/docs/CVE-YYYY-NNNNN.html
+for each CVE listed above. Each fix is in its own commit on this branch
+with both the original upstream commit reference (cherry-pick trailer)
+and a note describing any backport-specific conflict resolution.
+
+---
+
+(Original upstream 8.17.0 release notes follow.)
+
 curl and libcurl 8.17.0
 
  Public curl releases:         271

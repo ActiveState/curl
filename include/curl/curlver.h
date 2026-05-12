@@ -31,8 +31,10 @@
 #define LIBCURL_COPYRIGHT "Daniel Stenberg, <daniel@haxx.se>."
 
 /* This is the version number of the libcurl package from which this header
-   file origins: */
-#define LIBCURL_VERSION "8.17.0-DEV"
+   file origins. ActiveState security-backport releases append a fourth
+   component to the upstream version (e.g. 8.17.0.1). LIBCURL_VERSION_NUM
+   is unchanged since the public API is identical to upstream 8.17.0. */
+#define LIBCURL_VERSION "8.17.0.1"
 
 /* The numeric version number is also available "in parts" by using these
    defines: */
