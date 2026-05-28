@@ -472,6 +472,12 @@ static CURLcode smb_setup_connection(struct Curl_easy *data,
   struct smb_conn *smbc;
   struct smb_request *req;
 
+  /* SMB(S) connections must not be reused: the code does not consider the
+     share name as a property to match for connection reuse, so a reused
+     connection could end up transferring files to/from the wrong share.
+     Disable reuse entirely (CVE-2026-5773). */
+  conn->bits.no_reuse = TRUE;
+
   /* Initialize the connection state */
   smbc = calloc(1, sizeof(*smbc));
   if(!smbc ||
