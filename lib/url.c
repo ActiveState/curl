@@ -778,7 +778,7 @@ struct url_conn_match {
   BIT(want_proxy_ntlm_http);
   BIT(want_nego_http);
   BIT(want_proxy_nego_http);
-
+  BIT(req_tls); /* require TLS use from a clear-text start */
   BIT(wait_pipe);
   BIT(force_reuse);
   BIT(seen_pending_conn);
@@ -930,6 +930,9 @@ static bool url_match_ssl_use(struct connectdata *conn,
        (get_protocol_family(conn->handler) != m->needle->handler->protocol))
       return FALSE;
   }
+  else if(m->req_tls)
+    /* a clear-text STARTTLS protocol with required TLS */
+    return FALSE;
   return TRUE;
 }
 
@@ -1392,6 +1395,7 @@ ConnectionExists(struct Curl_easy *data,
      (needle->handler->protocol & PROTO_FAMILY_HTTP));
 #endif
 #endif
+  match.req_tls = data->set.use_ssl >= CURLUSESSL_CONTROL;
 
   /* Find a connection in the pool that matches what "data + needle"
    * requires. If a suitable candidate is found, it is attached to "data". */
