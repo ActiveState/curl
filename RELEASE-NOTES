@@ -1,4 +1,4 @@
-curl and libcurl 8.17.0.1 (ActiveState security backport)
+curl and libcurl 8.17.0.20 (ActiveState security backport)
 
 This is a downstream security backport of curl 8.17.0 maintained by
 ActiveState for environments that require OpenSSL 1.1.1 compatibility.
@@ -6,7 +6,24 @@ Upstream curl 8.18.0 raised the minimum OpenSSL version to 3.0.0, which
 makes simply tracking upstream impossible for OpenSSL-1.1.1-based stacks.
 
 This release backports security fixes only. No new features, API changes,
-or behavioral changes are included.
+or behavioral changes are included. The fourth version component (.20)
+indicates that this revision is patched up to and including the security
+fixes published in upstream curl 8.20.0.
+
+Security fixes backported from upstream 8.20.0:
+
+ o CVE-2026-4873: connection requiring TLS reused a clear-text STARTTLS connection (IMAP/POP3/SMTP)
+ o CVE-2026-5545: wrong reuse of an HTTP Negotiate-authenticated connection
+ o CVE-2026-5773: wrong reuse of an SMB(S) connection (share name not matched)
+ o CVE-2026-6253: first-proxy credentials passed on to a second proxy across a redirect
+ o CVE-2026-6276: stale custom Host: header leaks cookies on a reused easy handle
+ o CVE-2026-6429: .netrc password leaked to the redirect target host
+ o CVE-2026-7009: OpenSSL+Apple SecTrust treated missing required OCSP stapling as success
+ o CVE-2026-7168: cross-proxy Digest Proxy-Authorization leak on reused handle
+
+Additional hardening backported from upstream 8.20.0 (no CVE assigned):
+
+ o http: clear the host Digest authentication nonce on a cross-origin redirect
 
 Security fixes backported from upstream 8.18.0 / 8.19.0:
 

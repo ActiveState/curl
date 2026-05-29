@@ -34,7 +34,7 @@
    file origins. ActiveState security-backport releases append a fourth
    component to the upstream version (e.g. 8.17.0.1). LIBCURL_VERSION_NUM
    is unchanged since the public API is identical to upstream 8.17.0. */
-#define LIBCURL_VERSION "8.17.0.1"
+#define LIBCURL_VERSION "8.17.0.20"
 
 /* The numeric version number is also available "in parts" by using these
    defines: */
